@@ -9,6 +9,7 @@
 </head>
 </head>
 <body>
+<img src="images/256_256_Logo.jpg" alt="" width="100">
 <h1 align="center">Hi, This is Kiran</h1>
 <h1 align="center">This static webapp is created to refresh my basics on DevOps tools</h1>
 <h1 align="center">How is this webapp hosted:</h1>
