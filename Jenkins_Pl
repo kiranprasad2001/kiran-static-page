@@ -9,6 +9,7 @@ tools{
   maven 'mvn384'
 }
 
+
 stages{
   stage('code-checkout'){
     steps{
@@ -32,7 +33,13 @@ stages{
       }
     }
   }
+  stage('Slack'){
+    steps{
+      slackSend channel: 'jenkins-build-success', message: '${BUILD_NUMBER} - Successful', tokenCredentialId: 'Slack'
+    }
+  }
 }
+/*
 post{
   success{
     emailtextbody:'"${BUILD_NUMBER} is successful
@@ -51,4 +58,5 @@ post{
     Deployment Team"', subject:'${BUILD_NUMBER} - Failure', to: 'kiranprasad2001@gmail.com'
   }
 }
+*/
 }
