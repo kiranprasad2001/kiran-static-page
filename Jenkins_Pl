@@ -4,15 +4,21 @@ pipeline{
   /*agent {
     label 'slave-1Node'
   }
-  
+
 */
 tools{
   maven 'mvn384'
 }
 
 triggers{
-pollSCM('* * * * *')
-githubPush()
+//  pollSCM('* * * * *')
+  githubPush()
+}
+
+options{
+  buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '3', daysToKeepStr: '', numToKeepStr: '3'))
+//  timestamps()
+//  buildDiscarder(logRotator(artifactDaysToKeepStr: '5', artifactNumToKeepStr: '5', daysToKeepStr: '5', numToKeepStr: '5')
 }
 
 stages{
@@ -38,6 +44,11 @@ stages{
       }
     }
   }
+//  stage('S3 Upload'){
+//    steps(
+//      s3Upload acl: 'PublicReadWrite', bucket: 'kirantomcatwarfiles/${JOB_NAME}-${BUILD_NUMBER}', cacheControl: '', excludePathPattern: '', file: '**/kiran-static-page.war', includePathPattern: '', metadatas: [''], path: '**jenkins/workspace/Test/Pipeline_Test', pathStyleAccessEnabled: true, redirectLocation: '', sseAlgorithm: '', tags: '', text: '', workingDir: ''
+//    )
+//  }
   stage('Slack'){
     steps{
       slackSend channel: 'jenkins-build-success', message: '${BUILD_NUMBER} - Successful', tokenCredentialId: 'Slack'
