@@ -13,7 +13,7 @@
 <h1 align="center">Hi, This is Kiran</h1>
 <h1 align="center">This static webapp is created to refresh my basics on DevOps tools</h1>
 <h1 align="center">How is this webapp hosted:</h1>
-<h2 align="center">Below chart gives you a brief idea</h2>
+<h2 align="center">Below chart gives you a brief idea:</h2>
 <hr>
 <br>
 	<h1><h3> Server Side IP Address </h3><br>
