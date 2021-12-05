@@ -1,10 +1,10 @@
 pipeline{
-//  agent any  //any represents Master jenkins node
+  agent any  //any represents Master jenkins node
 //below represents slave node
-  agent {
+/*  agent {
     label 'node1'
   }
-
+*/
 tools{
   maven 'mvn384'
 }
