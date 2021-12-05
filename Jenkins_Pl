@@ -10,7 +10,8 @@ tools{
 }
 
 triggers{
-  githubPush()
+pollSCM('* * * * *')
+githubPush()
 }
 
 stages{
