@@ -4,6 +4,7 @@ pipeline{
   /*agent {
     label 'slave-1Node'
   }
+  
 */
 tools{
   maven 'mvn384'
