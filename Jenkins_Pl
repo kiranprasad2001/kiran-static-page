@@ -1,0 +1,54 @@
+pipeline{
+  agent any  //any represents Master jenkins node
+//below represents slave node
+  /*agent {
+    label 'slave-1Node'
+  }
+*/
+tools{
+  maven 'mvn384'
+}
+
+stages{
+  stage('code-checkout'){
+    steps{
+      git branch: 'dev', credentialsId: 'GitHub', url: 'https://github.com/kiranprasad2001/kiran-static-page.git'
+    }
+  }
+  stage('Build'){
+    steps{
+      sh "mvn clean package"
+    }
+  }
+/*  stage('testReport'){
+    steps{
+      sh "mvn clean sonar:sonar"
+    }
+  } */
+  stage('DeployApp'){
+    steps{
+      sshagent(['tomcatServer']) {
+        sh "scp -o StrictHostKeyChecking=no target/kiran-static-page.war ec2-user@18.222.129.139:/opt/tomcat9/webapps"
+      }
+    }
+  }
+}
+post{
+  success{
+    emailtextbody:'"${BUILD_NUMBER} is successful
+    Please check the build url here for more details: ${BUILD_URL}
+    
+    Thanks,
+    Kiran
+    Deployment Team"', subject:'${BUILD_NUMBER} - Successfull', to: 'kiranprasad2001@gmail.com'
+  }
+  failure{
+    emailtextbody:'"${BUILD_NUMBER} failed
+    Please check the build url here for more details: ${BUILD_URL}
+    
+    Thanks,
+    Kiran
+    Deployment Team"', subject:'${BUILD_NUMBER} - Failure', to: 'kiranprasad2001@gmail.com'
+  }
+}
+}
