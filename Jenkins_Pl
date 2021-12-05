@@ -9,6 +9,9 @@ tools{
   maven 'mvn384'
 }
 
+triggers{
+  githubPush()
+}
 
 stages{
   stage('code-checkout'){
